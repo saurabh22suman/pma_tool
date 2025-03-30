@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Video Call</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Secure Video Call</h1>
+            <p>A lightweight, secure video calling application</p>
+        </header>
+        
+        <main>
+            <div class="card">
+                <div class="card-body">
+                    <h2>Start or Join a Call</h2>
+                    
+                    <div class="action-buttons">
+                        <button id="create-room-btn" class="btn btn-primary">Create New Room</button>
+                        
+                        <div class="divider">
+                            <span>OR</span>
+                        </div>
+                        
+                        <div class="join-form">
+                            <input type="text" id="room-id-input" placeholder="Enter Room ID" class="form-control">
+                            <button id="join-room-btn" class="btn btn-secondary">Join Room</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Secure Video Call | <a href="#" id="privacy-link">Privacy Policy</a></p>
+        </footer>
+    </div>
+    
+    <!-- Modal for displaying room ID -->
+    <div id="room-created-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Room Created</h2>
+            <p>Share this room ID with others to join the call:</p>
+            <div class="room-id-container">
+                <input type="text" id="created-room-id" readonly>
+                <button id="copy-room-id" class="btn btn-small">Copy</button>
+            </div>
+            <button id="enter-room-btn" class="btn btn-primary">Enter Room</button>
+        </div>
+    </div>
+    
+    <!-- Socket.IO -->
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <!-- Main JavaScript -->
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

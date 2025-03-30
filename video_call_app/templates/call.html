@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Video Call</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="call-page">
+    <div class="call-container">
+        <div class="call-header">
+            <h1>Secure Video Call</h1>
+            <div class="room-info">
+                <span>Room ID: </span>
+                <span id="room-id">{{ room_id }}</span>
+                <button id="copy-room-id-btn" class="btn btn-small">Copy</button>
+            </div>
+        </div>
+        
+        <div class="video-grid" id="video-grid">
+            <!-- Local video will be added here -->
+            <div class="video-container local-video-container">
+                <video id="local-video" autoplay muted playsinline></video>
+                <div class="video-label">You</div>
+            </div>
+            <!-- Remote videos will be added here dynamically -->
+        </div>
+        
+        <div class="call-controls">
+            <button id="toggle-video-btn" class="control-btn">
+                <span class="material-icons">videocam</span>
+            </button>
+            <button id="toggle-audio-btn" class="control-btn">
+                <span class="material-icons">mic</span>
+            </button>
+            <button id="share-screen-btn" class="control-btn">
+                <span class="material-icons">screen_share</span>
+            </button>
+            <button id="end-call-btn" class="control-btn end-call">
+                <span class="material-icons">call_end</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Connection status indicator -->
+    <div id="connection-status" class="connection-status">
+        <div class="status-indicator"></div>
+        <span class="status-text">Connected</span>
+    </div>
+    
+    <!-- Chat sidebar (optional) -->
+    <div class="chat-sidebar" id="chat-sidebar">
+        <div class="chat-header">
+            <h3>Chat</h3>
+            <button id="close-chat-btn" class="btn-icon">×</button>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button id="send-message-btn" class="btn btn-small">Send</button>
+        </div>
+    </div>
+    
+    <!-- Toggle chat button -->
+    <button id="toggle-chat-btn" class="toggle-chat-btn">
+        <span class="material-icons">chat</span>
+    </button>
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Socket.IO -->
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <!-- Simple-Peer for WebRTC -->
+    <script src="https://unpkg.com/simple-peer@9.11.1/simplepeer.min.js"></script>
+    <!-- Main JavaScript -->
+    <script src="{{ url_for('static', filename='js/call.js') }}"></script>
+</body>
+</html>
