@@ -6,7 +6,7 @@ import ssl
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex(16)
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='gevent')
 
 # Store active rooms
 rooms = {}
@@ -97,8 +97,11 @@ def handle_signal(data):
 
 def create_ssl_context():
     """Create SSL context for secure connections"""
-    cert_path = os.path.join('ssl', 'cert.pem')
-    key_path = os.path.join('ssl', 'key.pem')
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    ssl_dir = os.path.join(script_dir, 'ssl')
+    cert_path = os.path.join(ssl_dir, 'cert.pem')
+    key_path = os.path.join(ssl_dir, 'key.pem')
     
     if not (os.path.exists(cert_path) and os.path.exists(key_path)):
         print("SSL certificates not found. Please run generate_ssl.py first.")
@@ -109,9 +112,10 @@ def create_ssl_context():
     return context
 
 if __name__ == '__main__':
+    # Use gevent as the async mode for better Python 3.12 compatibility
     ssl_context = create_ssl_context()
     if ssl_context:
-        socketio.run(app, host='0.0.0.0', port=5000, ssl_context=ssl_context, debug=True)
+        socketio.run(app, host='0.0.0.0', port=5000, ssl_context=ssl_context, debug=True, async_mode='gevent')
     else:
         print("Running without SSL (not secure for production)")
-        socketio.run(app, host='0.0.0.0', port=5000, debug=True)
+        socketio.run(app, host='0.0.0.0', port=5000, debug=True, async_mode='gevent')

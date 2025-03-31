@@ -1,6 +1,9 @@
+setuptools>=65.5.0
 flask==2.3.3
 flask-socketio==5.3.4
 python-socketio==5.8.0
 python-engineio==4.5.1
-eventlet==0.33.3
+# Replacing eventlet with gevent for better Python 3.12 compatibility
+gevent==23.9.1
+gevent-websocket==0.10.1
 pyOpenSSL==23.2.0

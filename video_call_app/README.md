@@ -18,16 +18,38 @@ A lightweight, secure video calling web application built with Python and WebRTC
 - **Backend**: Python with Flask and Flask-SocketIO
 - **Frontend**: HTML, CSS, JavaScript
 - **Real-time Communication**: WebRTC (via Simple-Peer)
-- **Signaling**: Socket.IO
+- **Signaling**: Socket.IO with Gevent
 - **Security**: SSL/TLS with self-signed certificates (for development)
 
 ## Prerequisites
 
-- Python 3.8 or higher
+- Python 3.8 or higher (compatible with Python 3.12)
 - pip (Python package manager)
+- setuptools (for distutils module)
 - Modern web browser with WebRTC support (Chrome, Firefox, Edge, Safari)
 
 ## Installation
+
+### Automatic Installation (Recommended)
+
+1. Clone the repository or download the source code.
+
+2. Run the installation script:
+   ```
+   python video_call_app/install.py
+   ```
+   
+   Note: The installation script will work correctly regardless of which directory you run it from.
+   
+   This script will:
+   - Check your Python version
+   - Install setuptools (which provides the distutils module)
+   - Install all required dependencies
+   - Generate SSL certificates
+
+### Manual Installation
+
+If you prefer to install manually:
 
 1. Clone the repository or download the source code.
 
@@ -36,22 +58,34 @@ A lightweight, secure video calling web application built with Python and WebRTC
    cd video_call_app
    ```
 
-3. Install the required Python packages:
+3. Install setuptools (if not already installed):
+   ```
+   pip install setuptools>=65.5.0
+   ```
+
+4. Install the required Python packages:
    ```
    pip install -r requirements.txt
    ```
 
-4. Generate SSL certificates for secure connections:
+5. Generate SSL certificates for secure connections:
    ```
    python generate_ssl.py
    ```
 
 ## Usage
 
-1. Start the application:
+1. Start the application using the run script:
    ```
-   python app.py
+   python video_call_app/run.py
    ```
+   
+   Or directly with:
+   ```
+   python video_call_app/app.py
+   ```
+   
+   Note: Both scripts will work correctly regardless of which directory you run them from.
 
 2. Open your web browser and navigate to:
    ```

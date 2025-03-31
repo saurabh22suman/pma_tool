@@ -33,8 +33,11 @@ def generate_self_signed_cert(cert_file, key_file):
     print(f"Private key generated: {key_file}")
 
 if __name__ == "__main__":
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
     # Create ssl directory if it doesn't exist
-    ssl_dir = "ssl"
+    ssl_dir = os.path.join(script_dir, "ssl")
     if not os.path.exists(ssl_dir):
         os.makedirs(ssl_dir)
     
